@@ -20,7 +20,7 @@ scene.background = new THREE.Color( '#F2EFE9' );
 /**
  * Object
  */
-const width =  10;  
+const width =  1;  
 
 const height = 0.05;  
 
@@ -34,6 +34,7 @@ const material3 = new THREE.MeshBasicMaterial( { color: '#84AEBF', wireframe: fa
 const material4 = new THREE.MeshBasicMaterial( { color: '#6DDAF2', wireframe: false } );
 const spacing = 0.1;
 var rods = new THREE.Group();
+var rods1 = new THREE.Group();
 
 // linearly maps value from the range (a..b) to (c..d)
 function mapRange (value, a, b, c, d) {
@@ -43,15 +44,26 @@ function mapRange (value, a, b, c, d) {
     return c + value * (d - c);
 }
 
-for (let z = -15; z < 15; z+=(spacing+depth)) {
-    let geometry = new THREE.BoxGeometry( width*mapRange(Math.random(), 0, 1, 0.8, 1.1), height, depth );
-    let c = new THREE.Color(mapRange(z, -15, 15, 1, 0), mapRange(z, -15, 15, 0, 1), mapRange(Math.random(), 0, 1, 0.7, 0.95))
+for (let z = -15; z < 50; z+=(spacing+depth)) {
+    let geometry = new THREE.BoxGeometry( width /**mapRange(Math.random(), 0, 1, 0.8, 1.1)*/, height, depth );
+    let c = new THREE.Color(mapRange(z, -10, 10, 1, 0), mapRange(z, -10, 10, 0, 1), mapRange(Math.random(), 0, 1, 0.7, 0.95))
     const material = new THREE.MeshBasicMaterial( { color: c, wireframe: false } );
     let rod = new THREE.Mesh(geometry, material);
     rod.position.z = z;
-    rod.position.x = 1;
+    rod.position.x = 0;
     rod.rotation.z = (z / 2.1) *(Math.PI / 2);
     rods.add(rod);
+}
+
+for (let z = -20; z < 45; z+=(spacing+depth)) {
+    let geometry = new THREE.BoxGeometry( width /**mapRange(Math.random(), 0, 1, 0.8, 1.1)*/, height, depth );
+    let c = new THREE.Color(mapRange(z, -15, 15, 1, 0), mapRange(z, -15, 5, 0, 1), mapRange(Math.random(), 0, 1, 0.7, 0.95))
+    const material = new THREE.MeshBasicMaterial( { color: c, wireframe: false } );
+    let rod = new THREE.Mesh(geometry, material);
+    rod.position.z = z;
+    rod.position.x = -4;
+    rod.rotation.z = (z / 2.1) *(Math.PI / 2);
+    rods1.add(rod);
 }
 
 //material.side = THREE.DoubleSide
@@ -59,6 +71,7 @@ for (let z = -15; z < 15; z+=(spacing+depth)) {
 // const mesh2 = new THREE.Mesh(geometry, material)
 // mesh2.rotation.x += Math.PI / 2
 scene.add(rods)
+//scene.add(rods1)
 // scene.add(mesh2)
 
 /**
@@ -89,9 +102,9 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 5
-camera.position.y = 5
-camera.position.z = 5
+camera.position.x = 1
+camera.position.y = 1
+camera.position.z = 1
 scene.add(camera)
 
 // Controls
@@ -111,19 +124,25 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  * Animate
  */
 const clock = new THREE.Clock()
+//let angle = 0;
+//const axis1 = new THREE.Vector2(-4, 0);
 
 const tick = () =>
 {
+    //angle += 1
     const elapsedTime = clock.getElapsedTime()
     // mesh.rotation.x=elapsedTime*0.1     //consistent spinning across devices
     // mesh.rotation.y = elapsedTime * 0.1
-    //rods.rotation.z=elapsedTime*.9
-    rods.traverse((e)=>{
-        let speed = mapRange(e.position.z, -15, 15, 0.1, 0.5)
-        e.rotation.z = (e.position.z / 10) *(Math.PI / 2) + elapsedTime*speed;
+    rods.rotation.z = elapsedTime * .8
+    //rods1.rotateOnAxis(axis1, angle)
+    // angle = elapsedTime * 0.5;
+    // rods.rotation.z = angle;
+    // rods.traverse((e)=>{
+    //     let speed = mapRange(e.position.z, -15, 15, 0.1, 0.5)
+    //     e.rotation.z = (e.position.z / 10) *(Math.PI / 2) + elapsedTime*speed;
 
 
-    })
+    // })
     // mesh2.rotation.y = elapsedTime * -0.1
 
 
