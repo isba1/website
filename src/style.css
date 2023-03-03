@@ -7,6 +7,13 @@
     color: white
 }
 
+h1, p {
+    background-color: black; /* set the background color of the text elements */
+    background-color: transparent;
+    /*display: inline; /* make the text elements inline */
+    padding: 5px 10px; /* add some padding to the text elements */
+}
+
 html, body
 {
     overflow: hidden;

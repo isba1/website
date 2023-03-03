@@ -44,11 +44,11 @@ function mapRange (value, a, b, c, d) {
     return c + value * (d - c);
 }
 
-function createStrand (startZ, endZ, xPos) {
+function createStrand (startZ, endZ, xPos, startColor, endColor) {
     const rods = []
     for (let z = startZ; z < endZ; z+=(spacing+depth)) {
         let geometry = new THREE.BoxGeometry( width /**mapRange(Math.random(), 0, 1, 0.8, 1.1)*/, height, depth );
-        let c = new THREE.Color(mapRange(z, -10, 10, 1, 0), mapRange(z, -10, 10, 0, 1), mapRange(Math.random(), 0, 1, 0.7, 0.95))
+        let c = new THREE.Color(mapRange(z, startColor, endColor, 1, 0), mapRange(z, startColor, endColor, 0, 1), mapRange(Math.random(), 0, 1, 0.7, 0.95))
         const material = new THREE.MeshBasicMaterial( { color: c, wireframe: false } );
         let rod = new THREE.Mesh(geometry, material);
         rod.position.z = z;
@@ -60,17 +60,17 @@ function createStrand (startZ, endZ, xPos) {
     return rods;
 }
 
-const rods1 = createStrand(-50, 50, -10);
-const rods2 = createStrand(-50, 50, -8);
-const rods3 = createStrand(-50, 50, -6);
-const rods4 = createStrand(-50, 50, -4);
-const rods5 = createStrand(-50, 50, -2);
-const rods6 = createStrand(-50, 50, 0);
-const rods7 = createStrand(-50, 50, 2);
-const rods8 = createStrand(-50, 50, 4);
-const rods9 = createStrand(-50, 50, 6);
-const rods10 = createStrand(-50, 50, 8);
-const rods11 = createStrand(-50, 50, 10);
+const rods1 = createStrand(-50, 50, -10, 5, 25);
+const rods2 = createStrand(-50, 50, -8, 0, 20);
+const rods3 = createStrand(-50, 50, -6, -5, 15);
+const rods4 = createStrand(-50, 50, -4, -10, 10);
+const rods5 = createStrand(-50, 50, -2, -15, 5);
+const rods6 = createStrand(-50, 50, 0, -20, 0);
+const rods7 = createStrand(-50, 50, 2, -15, 5);
+const rods8 = createStrand(-50, 50, 4, -10, 10);
+const rods9 = createStrand(-50, 50, 6, -5, 15);
+const rods10 = createStrand(-50, 50, 8, 0, 20);
+const rods11 = createStrand(-50, 50, 10, 5, 25);
 
 
 // const rods = [];
@@ -148,8 +148,8 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 2
-camera.position.y = 10
+camera.position.x =0
+camera.position.y = 7
 camera.position.z = 1
 scene.add(camera)
 
@@ -185,11 +185,11 @@ const tick = () =>
     //angle += 1
     const elapsedTime = clock.getElapsedTime()
 
-    rotateStrand(rods1, 0.06);
-    rotateStrand(rods2, 0.055);
-    rotateStrand(rods3, 0.05);
-    rotateStrand(rods4, 0.045);
-    rotateStrand(rods5, 0.04);
+    rotateStrand(rods1, 0.01);
+    rotateStrand(rods2, 0.015);
+    rotateStrand(rods3, 0.02);
+    rotateStrand(rods4, 0.025);
+    rotateStrand(rods5, 0.030);
     rotateStrand(rods6, 0.035);
     rotateStrand(rods7, 0.03);
     rotateStrand(rods8, 0.025);
