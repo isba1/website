@@ -185,17 +185,17 @@ const tick = () =>
     //angle += 1
     const elapsedTime = clock.getElapsedTime()
 
-    rotateStrand(rods1, 0.01);
-    rotateStrand(rods2, 0.02);
-    rotateStrand(rods3, 0.03);
-    rotateStrand(rods4, 0.04);
-    rotateStrand(rods5, 0.05);
-    rotateStrand(rods6, 0.06);
-    rotateStrand(rods7, 0.07);
-    rotateStrand(rods8, 0.08);
-    rotateStrand(rods9, 0.09);
-    rotateStrand(rods10, 0.10);
-    rotateStrand(rods11, 0.11);
+    rotateStrand(rods1, 0.06);
+    rotateStrand(rods2, 0.055);
+    rotateStrand(rods3, 0.05);
+    rotateStrand(rods4, 0.045);
+    rotateStrand(rods5, 0.04);
+    rotateStrand(rods6, 0.035);
+    rotateStrand(rods7, 0.03);
+    rotateStrand(rods8, 0.025);
+    rotateStrand(rods9, 0.02);
+    rotateStrand(rods10, 0.015);
+    rotateStrand(rods11, 0.01);
 
 
     // mesh.rotation.x=elapsedTime*0.1     //consistent spinning across devices
